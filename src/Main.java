@@ -14,10 +14,10 @@ public class Main {
                 "ADD PERSON(Rafał_Adamczuk)",
                 "ADD PERSON(Tomasz_Romański)",
                 "ADD PERSON(Mariusz_Wilczek)",
-                "ADD PERSON(Zbigniew_Ratownik)"
-//                "PROCESS",
-//                "LEAVE PERSON(Tomasz_Romański_2)",
-//                "LEAVE PERSON(Mariusz_Wilczek)",
+                "ADD PERSON(Zbigniew_Ratownik)",
+                "PROCESS",
+                "LEAVE PERSON(Mariusz_Wilczek)",
+                "LEAVE PERSON(Tomasz_Romański_3)"
 //                "PROCESS",
 //                "PROCESS",
 //                "PROCESS"
