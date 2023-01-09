@@ -6,22 +6,32 @@ public class CommandProcessor {
     }
 
     public void processCommand(String command) {
-        if(command.contains("ADD PERSON")){
-            handleAddPerson(command);
-        } else if (command.contains("LEAVE PERSON" )){
+        if (command.contains("ADD PERSON")) {
+            handleAddPerson(command, command.contains("VIP"));
+        } else if (command.contains("LEAVE PERSON")) {
             handleLeavePerson(command);
-        } else if (command.contains("PROCESS" )) {
+        } else if (command.contains("PROCESS")) {
             handleProcess(command);
-        }else {
-            throw new RuntimeException("O co ci chodzi?" + command );
+        } else {
+            throw new RuntimeException("O co ci chodzi?" + command);
         }
 
     }
 
-    private void handleAddPerson(String command) {
+    private void handleAddPerson(String command, Boolean isVip) {
+        Person incomingPerson = createIncomingPerson(command, isVip);
+        System.out.println(command);
+        if (isVip){
+            queueStack.welcomeVip(incomingPerson);
+        }else{
+            queueStack.welcome(incomingPerson);
+        }
+    }
+
+    private Person createIncomingPerson(String command, Boolean isVip) {
         String personKey = command
                 .replace("ADD PERSON(", "" )
-                .replace(")", "" );
+                .replace(isVip ? ",VIP)" : ")",  "" );
 
         String[] split = personKey
                 .split("_");
@@ -31,14 +41,13 @@ public class CommandProcessor {
             String surname = split[1];
             Integer counter = queueStack.getCounter(personKey);
 
-            System.out.println(command);
-
-            queueStack.welcome(new Person(name, surname, counter));
+            return new Person(name, surname, counter);
         }
 
         else {
             throw  new IllegalArgumentException("Sth went wrong");
         }
+
     }
 
     private void handleLeavePerson(String command) {

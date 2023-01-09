@@ -7,6 +7,7 @@ public class Person {
     private Integer counter;
 
     private final String id;
+    private final Boolean isVip;
 
     @Override
     public String  toString() {
@@ -29,14 +30,22 @@ public class Person {
     }
 
     public Person(String name, String surname, Integer counter) {
+        this(name, surname, counter, false);
+    }
+
+    public Person(String name, String surname, Integer counter, Boolean isVip) {
         this.name = name;
         this.surname = surname;
         this.counter = counter;
+        this.isVip = isVip;
         this.id = generateId();
+
     }
 
     private String generateId() {
-        return this.name + "_" + this.surname + "_" + this.counter;
+        return this.isVip
+                ? this.name + "_" + this.surname + "_" + this.counter + "_VIP"
+                : this.name + "_" + this.surname + "_" + this.counter;
     }
 
 }
